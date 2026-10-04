@@ -1,4 +1,5 @@
 ---
+import Arrow from '../decorative/Arrow.astro';
 import { artworks, intentions } from '../../data/artworks';
 import PhotoArtwork from '../collection/PhotoArtwork.astro';
 ---
@@ -13,7 +14,7 @@ import PhotoArtwork from '../collection/PhotoArtwork.astro';
       </div>
     </div>
     <div class="intentions-list" data-reveal>
-      {intentions.map((intention,i)=><a href={`/collection/${intention.slug}/`} class="intention" data-intention={intention.slug}><span class="label intention-number">0{i+1}</span><span class="intention-name">{intention.name}</span><span class="intention-arrow" aria-hidden="true">↗</span><span class="sr-only"> — {intention.text}</span></a>)}
+      {intentions.map((intention,i)=><a href={`/collection/${intention.slug}/`} class="intention" data-intention={intention.slug}><span class="label intention-number">0{i+1}</span><span class="intention-name">{intention.name}</span><span class="intention-arrow" aria-hidden="true"><Arrow/></span><span class="sr-only"> — {intention.text}</span></a>)}
     </div>
   </div>
 </section>

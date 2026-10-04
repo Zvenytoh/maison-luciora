@@ -1,4 +1,5 @@
 ---
+import Arrow from '../decorative/Arrow.astro';
 import Sun from '../decorative/Sun.astro';
 ---
 <footer class="site-footer">
@@ -7,7 +8,7 @@ import Sun from '../decorative/Sun.astro';
     <a class="footer-wordmark" href="/" title="Maison Luciora — accueil"><span>MAISON </span><span>LUCIORA</span></a>
     <div class="footer-bottom">
       <p>© {new Date().getFullYear()} Maison Luciora</p>
-      <nav aria-label="Navigation de pied de page"><a href="/collection/">Collection</a><a href="/maison/">La Maison</a><a href="/contact/">Contact</a><a href="https://www.instagram.com/maisonluciora/" target="_blank" rel="noreferrer">Instagram ↗</a></nav>
+      <nav aria-label="Navigation de pied de page"><a href="/collection/">Collection</a><a href="/maison/">La Maison</a><a href="/contact/">Contact</a><a href="https://www.instagram.com/maisonluciora/" target="_blank" rel="noreferrer">Instagram <Arrow/></a></nav>
       <p>FRANCE — MMXXVI</p>
     </div>
   </div>

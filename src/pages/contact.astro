@@ -1,9 +1,10 @@
 ---
+import Arrow from '../components/decorative/Arrow.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Sun from '../components/decorative/Sun.astro';
 ---
 <BaseLayout title="Contact" description="Écrivez à Maison Luciora pour une question sur une œuvre, une attention à offrir ou un projet à imaginer ensemble.">
-  <section class="contact container" aria-labelledby="contact-title"><div class="contact-copy"><p class="label eyebrow">ENTRER EN CONVERSATION</p><h1 id="contact-title">Écrivons<br/><em>la suite.</em></h1><p class="contact-intro">Une œuvre vous parle.<br/>Une question vous accompagne.<br/>La Maison vous écoute.</p><div class="contact-links"><div><p class="label">NOUS ÉCRIRE</p><a class="contact-email" href="mailto:bonjour@maisonluciora.fr">bonjour@<wbr/>maisonluciora.fr <span aria-hidden="true">↗</span></a></div><div><p class="label">SUIVRE LA MAISON</p><a class="contact-instagram" href="https://www.instagram.com/maisonluciora/" target="_blank" rel="noreferrer">@maisonluciora <span aria-hidden="true">↗</span></a></div></div></div><div class="contact-symbol" aria-hidden="true"><Sun/><p class="label">DES SYMBOLES À GARDER.</p></div></section>
+  <section class="contact container" aria-labelledby="contact-title"><div class="contact-copy"><p class="label eyebrow">ENTRER EN CONVERSATION</p><h1 id="contact-title">Écrivons<br/><em>la suite.</em></h1><p class="contact-intro">Une œuvre vous parle.<br/>Une question vous accompagne.<br/>La Maison vous écoute.</p><div class="contact-links"><div><p class="label">NOUS ÉCRIRE</p><a class="contact-email" href="mailto:bonjour@maisonluciora.fr">bonjour@<wbr/>maisonluciora.fr <span aria-hidden="true"><Arrow/></span></a></div><div><p class="label">SUIVRE LA MAISON</p><a class="contact-instagram" href="https://www.instagram.com/maisonluciora/" target="_blank" rel="noreferrer">@maisonluciora <span aria-hidden="true"><Arrow/></span></a></div></div></div><div class="contact-symbol" aria-hidden="true"><Sun/><p class="label">DES SYMBOLES À GARDER.</p></div></section>
 </BaseLayout>
 <style>
   .contact { min-height: 92svh; display: grid; grid-template-columns: repeat(12,minmax(0,1fr)); gap: 28px; padding-top: 165px; padding-bottom: 115px; align-items: center; }
@@ -20,5 +21,5 @@ import Sun from '../components/decorative/Sun.astro';
   .contact-symbol { grid-column: 9/13; text-align: center; color: var(--gold); }
   .contact-symbol :global(svg) { width: 100%; }
   .contact-symbol p { font-size: 8px; letter-spacing: .24em; color: var(--gold-dark); margin-top: 35px; }
-  @media(max-width:767px) { .contact { display: block; padding-top: 145px; padding-bottom: 88px; } h1 { font-size: 100px; } .contact-intro { font-size: 12px; } .contact-email { font-size: clamp(30px,8.3vw,43px); } .contact-symbol { width: 160px; margin: 78px auto 0; } .contact-symbol p { margin-top: 25px; font-size: 7px; } }
+  @media(max-width:767px) { .contact { display: block; padding-top: 145px; padding-bottom: 88px; } h1 { font-size: clamp(88px,27vw,100px); } .contact-intro { font-size: 12px; } .contact-email { font-size: clamp(30px,8.3vw,43px); } .contact-symbol { width: 160px; margin: 78px auto 0; } .contact-symbol p { margin-top: 25px; font-size: 7px; } }
 </style>

@@ -1,4 +1,5 @@
 ---
+import Arrow from '../decorative/Arrow.astro';
 import Star from '../decorative/Star.astro';
 import PhotoArtwork from '../collection/PhotoArtwork.astro';
 import { artworks } from '../../data/artworks';
@@ -16,7 +17,7 @@ import { artworks } from '../../data/artworks';
     <Star type="eight" class="hero-star"/>
     <figure data-parallax>
       <a href="/collection/le-soleil/" aria-label="Découvrir Le Soleil"><PhotoArtwork artwork={artworks[0]} eager/></a>
-      <figcaption><span class="hero-roman">XIX</span><span><span class="label">LE SOLEIL</span><span class="caption-meaning">Clarté · Vitalité · Accomplissement</span></span><a href="/collection/le-soleil/" aria-label="Découvrir Le Soleil" class="caption-arrow">↗</a></figcaption>
+      <figcaption><span class="hero-roman">XIX</span><span><span class="label">LE SOLEIL</span><span class="caption-meaning">Clarté · Vitalité · Accomplissement</span></span><a href="/collection/le-soleil/" aria-label="Découvrir Le Soleil" class="caption-arrow"><Arrow/></a></figcaption>
     </figure>
   </div>
   <a class="scroll-cue label" href="#introduction"><span>PRENDRE LE TEMPS</span><span class="scroll-line" aria-hidden="true"></span></a>

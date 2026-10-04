@@ -1,4 +1,5 @@
 ---
+import Arrow from '../decorative/Arrow.astro';
 import Star from '../decorative/Star.astro';
 const path = Astro.url.pathname;
 const links = [{ href: '/collection/', label: 'Collection' }, { href: '/maison/', label: 'La Maison' }, { href: '/#intentions', label: 'Significations' }, { href: '/contact/', label: 'Contact' }];
@@ -19,7 +20,7 @@ const links = [{ href: '/collection/', label: 'Collection' }, { href: '/maison/'
   <div class="mobile-menu-top"><a class="wordmark" href="/" title="Maison Luciora — accueil"><span>MAISON </span><span>LUCIORA</span></a><button class="menu-close label" type="button">Fermer <span aria-hidden="true">×</span></button></div>
   <div class="menu-decoration" aria-hidden="true"><Star type="eight" class="menu-star"/></div>
   <nav aria-label="Navigation mobile">{links.map((link,i)=><a href={link.href}><span class="label">0{i+1}</span><span>{link.label}</span></a>)}</nav>
-  <div class="mobile-menu-bottom"><a href="https://www.instagram.com/maisonluciora/" target="_blank" rel="noreferrer">Instagram ↗</a><span>France · MMXXVI</span></div>
+  <div class="mobile-menu-bottom"><a href="https://www.instagram.com/maisonluciora/" target="_blank" rel="noreferrer">Instagram <Arrow/></a><span>France · MMXXVI</span></div>
 </dialog>
 <style>
   .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 30; height: 94px; transition: height .3s, background .3s; }
