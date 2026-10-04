@@ -1,0 +1,41 @@
+---
+import { artworks, intentions } from '../../data/artworks';
+import PhotoArtwork from '../collection/PhotoArtwork.astro';
+---
+<section class="intentions section" id="intentions" aria-labelledby="intentions-title">
+  <div class="container intentions-grid">
+    <div class="intentions-copy" data-reveal>
+      <p class="label eyebrow">CHOISIR AUTREMENT</p>
+      <h2 id="intentions-title">Parfois, on cherche<br/>d’abord ce que l’on<br/><em>souhaite dire.</em></h2>
+      <p>Pour soi. Pour quelqu’un.<br/>Pour un moment qui compte.</p>
+      <div class="intention-preview" data-intention-preview aria-hidden="true">
+        {[artworks[0],artworks[1],artworks[3],artworks[4]].map((artwork,i)=><div data-preview-artwork={artwork.slug} hidden={i !== 0}><PhotoArtwork artwork={artwork}/><p class="label">{artwork.roman} — {artwork.name}</p></div>)}
+      </div>
+    </div>
+    <div class="intentions-list" data-reveal>
+      {intentions.map((intention,i)=><a href={`/collection/${intention.slug}/`} class="intention" data-intention={intention.slug}><span class="label intention-number">0{i+1}</span><span class="intention-name">{intention.name}</span><span class="intention-arrow" aria-hidden="true">↗</span><span class="sr-only"> — {intention.text}</span></a>)}
+    </div>
+  </div>
+</section>
+<style>
+  .intentions { background: var(--paper-deep); }
+  .intentions-grid { display: grid; grid-template-columns: repeat(12,minmax(0,1fr)); gap: 28px; }
+  .intentions-copy { grid-column: 1/6; }
+  h2 { font-size: clamp(45px,4.25vw,66px); line-height: 1.05; }
+  h2 em { color: var(--gold-dark); }
+  .intentions-copy > p:not(.label) { font-size: 12px; margin-top: 28px; line-height: 1.9; }
+  .intention-preview { width: 176px; margin-top: 48px; }
+  .intention-preview :global(img) { aspect-ratio: 4/5; width: 100%; object-fit: cover; }
+  .intention-preview p { font-size: 8px; margin-top: 12px; color: var(--gold-dark); }
+  [hidden] { display: none !important; }
+  .intentions-list { grid-column: 7/13; }
+  .intention { display: flex; align-items: center; min-height: 84px; gap: 25px; border-top: 1px solid var(--line); padding: 18px 0; }
+  .intention:last-child { border-bottom: 1px solid var(--line); }
+  .intention-number { color: var(--ink-muted); font-size: 8px; }
+  .intention-name { font: 400 clamp(30px,3.35vw,52px)/1.05 var(--font-display); letter-spacing: -.02em; transition: transform .4s var(--ease-out), color .4s; }
+  .intention-arrow { font-size: 23px; margin-left: auto; transition: transform .4s; }
+  .intention:hover .intention-name { transform: translateX(5px); color: var(--gold-dark); }
+  .intention:hover .intention-arrow { transform: translate(2px,-2px); }
+  @media(max-width:1024px) and (min-width:768px) { .intentions-grid { gap: 20px; } .intentions-copy { grid-column: 1/7; } .intentions-list { grid-column: 8/13; } h2 { font-size: 45px; } .intention { gap: 12px; min-height: 76px; } .intention-name { font-size: 32px; } .intention-number { display: none; } }
+  @media(max-width:767px) { .intentions-grid { display: block; } h2 { font-size: clamp(43px,10.8vw,62px); } .intention-preview { display: none; } .intentions-list { margin-top: 47px; } .intention { min-height: 73px; padding-block: 17px; gap: 15px; } .intention-name { font-size: clamp(30px,8vw,44px); } .intention-arrow { font-size: 20px; } }
+</style>

@@ -1,0 +1,50 @@
+---
+import Star from '../decorative/Star.astro';
+const path = Astro.url.pathname;
+const links = [{ href: '/collection/', label: 'Collection' }, { href: '/maison/', label: 'La Maison' }, { href: '/#intentions', label: 'Significations' }, { href: '/contact/', label: 'Contact' }];
+---
+<header class="site-header" id="site-header">
+  <div class="header-inner container">
+    <nav class="nav-side nav-left" aria-label="Navigation principale">
+      {links.slice(0,2).map(link => <a class="nav-link" href={link.href} aria-current={path.startsWith(link.href) ? 'page' : undefined}>{link.label}</a>)}
+    </nav>
+    <a class="wordmark" href="/" title="Maison Luciora — accueil"><span>MAISON </span><span>LUCIORA</span></a>
+    <nav class="nav-side nav-right" aria-label="Navigation complémentaire">
+      {links.slice(2).map(link => <a class="nav-link" href={link.href} aria-current={path === link.href ? 'page' : undefined}>{link.label}</a>)}
+    </nav>
+    <button class="menu-toggle label" type="button" aria-expanded="false" aria-controls="mobile-menu">Menu <span aria-hidden="true">+</span></button>
+  </div>
+</header>
+<dialog class="mobile-menu" id="mobile-menu" aria-label="Navigation">
+  <div class="mobile-menu-top"><a class="wordmark" href="/" title="Maison Luciora — accueil"><span>MAISON </span><span>LUCIORA</span></a><button class="menu-close label" type="button">Fermer <span aria-hidden="true">×</span></button></div>
+  <div class="menu-decoration" aria-hidden="true"><Star type="eight" class="menu-star"/></div>
+  <nav aria-label="Navigation mobile">{links.map((link,i)=><a href={link.href}><span class="label">0{i+1}</span><span>{link.label}</span></a>)}</nav>
+  <div class="mobile-menu-bottom"><a href="https://www.instagram.com/maisonluciora/" target="_blank" rel="noreferrer">Instagram ↗</a><span>France · MMXXVI</span></div>
+</dialog>
+<style>
+  .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 30; height: 94px; transition: height .3s, background .3s; }
+  .site-header.is-scrolled { height: 74px; background: rgba(244,238,227,.95); border-bottom: 1px solid var(--line-light); backdrop-filter: blur(12px); }
+  .header-inner { height: 100%; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+  .wordmark { color: var(--gold-dark); font-family: var(--font-display); display: flex; flex-direction: column; text-align: center; line-height: 1; align-items: center; }
+  .wordmark span:first-child { font-size: 9px; letter-spacing: .34em; margin-bottom: 5px; padding-left: .34em; }
+  .wordmark span:last-child { font-size: 31px; letter-spacing: .07em; }
+  .nav-side { display: flex; gap: clamp(22px, 3vw, 48px); }
+  .nav-right { justify-content: flex-end; }
+  .nav-link { font-size: 11px; min-height: 44px; display: inline-flex; align-items: center; position: relative; }
+  .nav-link::after { content: ''; position: absolute; bottom: 7px; left: 0; right: 0; height: 1px; background: var(--gold); transform: scaleX(0); transform-origin: right; transition: transform .35s; }
+  .nav-link:hover::after, .nav-link[aria-current]::after { transform: scaleX(1); transform-origin: left; }
+  .menu-toggle { display: none; background: none; border: 0; min-height: 44px; padding: 0 0 0 18px; }
+  .menu-toggle span, .menu-close span { font-size: 20px; font-weight: 400; margin-left: 10px; }
+  .mobile-menu { border: 0; background: var(--paper); color: var(--ink); width: 100%; max-width: none; height: 100dvh; max-height: none; margin: 0; padding: 24px; overflow: auto; }
+  .mobile-menu[open] { display: flex; flex-direction: column; animation: hero-enter .4s var(--ease-out); }
+  .mobile-menu::backdrop { background: var(--paper); }
+  .mobile-menu-top { display: flex; justify-content: space-between; align-items: center; z-index: 1; }
+  .menu-close { background: none; border: 0; min-height: 44px; }
+  .mobile-menu nav { position: relative; z-index: 1; display: grid; gap: 17px; margin-block: auto; padding-block: 54px; }
+  .mobile-menu nav a { font: 400 clamp(38px,10vw,68px)/1.2 var(--font-display); display: flex; align-items: center; gap: 20px; }
+  .mobile-menu nav .label { font-family: var(--font-ui); color: var(--gold); }
+  .menu-decoration { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  :global(.menu-star) { position: absolute; width: 75vw; height: 75vw; right: -22vw; top: 27%; color: var(--gold); opacity: .055; pointer-events: none; }
+  .mobile-menu-bottom { display: flex; justify-content: space-between; font-size: 10px; position: relative; padding-bottom: 16px; }
+  @media(max-width:767px) { .site-header { height: 84px; margin-bottom: -84px; } .site-header.is-scrolled { height: 68px; } .header-inner { display: flex; justify-content: space-between; } .nav-side { display: none; } .menu-toggle { display: flex; align-items: center; } .wordmark span:last-child { font-size: 28px; } }
+</style>

@@ -1,0 +1,14 @@
+---
+import PhotoArtwork from './PhotoArtwork.astro';
+import type { Artwork } from '../../data/artworks';
+interface Props { artwork: Artwork; index?: number; }
+const { artwork, index = 0 } = Astro.props;
+---
+<article class:list={['artwork-card', `artwork-position-${index % 5}`]} data-reveal>
+  <a class="artwork-image-link" href={`/collection/${artwork.slug}/`} aria-label={`Découvrir ${artwork.name}`}>
+    <PhotoArtwork artwork={artwork}/><span class="image-link-label">Découvrir <span aria-hidden="true">↗</span></span>
+  </a>
+  <div class="artwork-meta"><span class="label">{artwork.roman}</span><span class="label">LES ARCANES</span></div>
+  <h3><a href={`/collection/${artwork.slug}/`}>{artwork.name}</a></h3>
+  <p class="artwork-keywords">{artwork.keywords.join(' · ')}</p>
+</article>

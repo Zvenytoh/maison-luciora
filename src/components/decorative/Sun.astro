@@ -1,0 +1,13 @@
+---
+interface Props { class?: string; }
+const { class: className = '' } = Astro.props;
+const rays = Array.from({ length: 32 }, (_, i) => i * 11.25);
+---
+<svg class={className} viewBox="0 0 240 240" fill="none" aria-hidden="true">
+  <g stroke="currentColor" stroke-width=".65">
+    {rays.map((angle, i) => <path transform={`rotate(${angle} 120 120)`} d={i % 2 ? 'M116 76C110 58 126 40 120 10C127 41 121 59 124 76' : 'M117 76L120 0L123 76'} />)}
+    <circle cx="120" cy="120" r="44"/><circle cx="120" cy="120" r="40"/>
+    <path d="M93 109Q103 99 113 109M127 109Q137 99 147 109M95 111Q103 107 111 111M129 111Q137 107 145 111M103 108V114M137 108V114M121 107L116 132Q120 136 125 132M108 144Q120 139 132 144Q120 153 108 144M116 158Q120 160 124 158"/>
+    <path d="M92 101Q103 94 113 101M127 101Q137 94 148 101M87 118Q87 146 105 156M153 118Q153 146 135 156"/>
+  </g>
+</svg>

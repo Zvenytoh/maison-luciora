@@ -1,0 +1,20 @@
+---
+import Divider from '../decorative/Divider.astro';
+---
+<section class="introduction section container" id="introduction" aria-labelledby="intro-title">
+  <div data-reveal>
+    <p class="label eyebrow">LA BEAUTÉ A PARFOIS QUELQUE CHOSE À DIRE.</p>
+    <h2 id="intro-title">Une œuvre.<br/><em>Une intention.</em></h2>
+    <p>Certaines choses trouvent leur place chez nous parce qu’elles sont belles.<br class="desktop-break"/> D’autres parce qu’elles nous rappellent quelque chose.</p>
+    <p class="intro-signature">Maison Luciora réunit les deux.</p>
+  </div>
+  <Divider/>
+</section>
+<style>
+  .introduction { text-align: center; max-width: 820px; }
+  h2 { font-size: clamp(60px,6.4vw,96px); }
+  .introduction p:not(.label) { font-size: 14px; line-height: 1.9; margin-top: 32px; }
+  .introduction .intro-signature { margin-top: 15px; color: var(--ink); }
+  .introduction :global(.celestial-divider) { margin-top: 62px; }
+  @media(max-width:767px) { .introduction { padding-top: 100px; padding-bottom: 96px; } h2 { font-size: 60px; } .introduction p:not(.label) { font-size: 12px; } .desktop-break { display: none; } .introduction .label { font-size: 8px; } }
+</style>

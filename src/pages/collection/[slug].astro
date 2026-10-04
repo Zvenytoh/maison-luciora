@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PhotoArtwork from '../../components/collection/PhotoArtwork.astro';
+import Divider from '../../components/decorative/Divider.astro';
+import { artworks, type Artwork } from '../../data/artworks';
+export function getStaticPaths() { return artworks.map(artwork => ({ params: { slug: artwork.slug }, props: { artwork } })); }
+interface Props { artwork: Artwork; }
+const { artwork } = Astro.props;
+const ordered = [...artworks].sort((a,b) => a.number - b.number);
+const index = ordered.findIndex(item => item.slug === artwork.slug);
+const previous = ordered[(index - 1 + ordered.length) % ordered.length];
+const next = ordered[(index + 1) % ordered.length];
+---
+<BaseLayout title={artwork.name} description={`Découvrez ${artwork.name}, une œuvre Maison Luciora inspirée de l’arcane ${artwork.roman}. ${artwork.keywords.join(', ')}. ${artwork.excerpt}`} artwork={artwork}>
+  <section class="artwork-hero container" aria-labelledby="artwork-title">
+    <span class="giant-roman" aria-hidden="true">{artwork.roman}</span>
+    <div class="artwork-hero-copy hero-copy"><a class="label breadcrumb" href="/collection/">COLLECTION <span aria-hidden="true">/</span> {artwork.roman}</a><h1 id="artwork-title">{artwork.name}</h1><p class="artwork-hero-keywords">{artwork.keywords.map(keyword=><span>{keyword}</span>)}</p><p class="artwork-excerpt">{artwork.excerpt}</p><a class="text-link" href="#symbolique">Explorer sa symbolique</a></div>
+    <figure class="artwork-hero-image hero-art"><PhotoArtwork artwork={artwork} eager/><figcaption class="label">ARCANE {artwork.roman} <span>MAISON LUCIORA — LES ARCANES</span></figcaption></figure>
+  </section>
+  <section class="meaning section container" id="symbolique" aria-labelledby="meaning-title"><div class="meaning-title" data-reveal><p class="label eyebrow">SA SYMBOLIQUE</p><h2 id="meaning-title">{artwork.tagline}</h2></div><div class="meaning-body prose" data-reveal>{artwork.meaning.map(paragraph=><p>{paragraph}</p>)}</div></section>
+  <section class="self-gift container" aria-label="Choisir pour soi ou offrir"><div data-reveal><p class="label eyebrow">POUR SOI</p><h3>Un repère personnel.</h3><p>{artwork.forSelf}</p></div><div data-reveal><p class="label eyebrow">À OFFRIR</p><h3>Une attention qui reste.</h3><p>{artwork.forGift}</p></div></section>
+  <section class="artwork-details section container" aria-labelledby="details-title"><div class="details-heading" data-reveal><p class="label eyebrow">LE LANGAGE DE L’ŒUVRE</p><h2 id="details-title">Regarder de plus près.</h2></div><div class="detail-zoom image-reveal" data-image-reveal><PhotoArtwork artwork={artwork}/><span class="detail-roman" aria-hidden="true">{artwork.roman}</span></div><div class="detail-annotations">{artwork.details.map((detail,i)=><div data-reveal><p class="label">0{i+1} — {detail.title}</p><p>{detail.text}</p></div>)}</div></section>
+  <div class="container artwork-contact" data-reveal><Divider/><p class="serif">Une question à propos de cette œuvre ?</p><a class="text-link" href="/contact/">Écrire à la Maison</a></div>
+  <nav class="artwork-navigation container" aria-label="Parcourir les œuvres"><a href={`/collection/${previous.slug}/`}><span class="label">ARCANE {previous.roman}</span><span class="serif"><span aria-hidden="true">←</span> {previous.name}</span></a><a href={`/collection/${next.slug}/`}><span class="label">ARCANE {next.roman}</span><span class="serif">{next.name} <span aria-hidden="true">→</span></span></a></nav>
+</BaseLayout>
+<style>
+  .artwork-hero { padding-top: 156px; padding-bottom: 85px; display: grid; grid-template-columns: repeat(12,minmax(0,1fr)); gap: 28px; align-items: center; position: relative; isolation: isolate; }
+  .giant-roman { position: absolute; width: 100%; overflow: hidden; white-space: nowrap; pointer-events: none; font: 400 clamp(230px,30vw,450px)/1 var(--font-display); color: var(--gold-dark); opacity: .045; top: 33%; left: 0; z-index: -1; }
+  .artwork-hero-copy { grid-column: 1/6; }
+  .breadcrumb { display: inline-flex; align-items: center; gap: 13px; color: var(--gold-dark); min-height: 44px; margin-bottom: 30px; }
+  h1 { font-size: clamp(78px,8vw,124px); line-height: .9; }
+  .artwork-hero-keywords { display: flex; flex-direction: column; font: 400 31px/1.35 var(--font-display); color: var(--gold-dark); margin-top: 34px; }
+  .artwork-excerpt { font-size: 12px; line-height: 1.9; max-width: 315px; margin-top: 28px; }
+  .artwork-hero-copy .text-link { margin-top: 22px; }
+  .artwork-hero-image { grid-column: 7/13; }
+  .artwork-hero-image :global(img) { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+  figcaption { padding-top: 18px; font-size: 8px; display: flex; justify-content: space-between; gap: 15px; color: var(--gold-dark); }
+  .meaning { border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(12,minmax(0,1fr)); gap: 28px; }
+  .meaning-title { grid-column: 2/7; }
+  .meaning-title h2 { font-size: clamp(50px,5.2vw,78px); max-width: 510px; }
+  .meaning-body { grid-column: 8/12; font-size: 13px; line-height: 1.95; padding-top: 40px; }
+  .self-gift { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .self-gift > div { padding: 55px clamp(24px,5vw,80px); }
+  .self-gift > div + div { border-left: 1px solid var(--line); }
+  .self-gift h3 { font-size: 37px; }
+  .self-gift p:not(.label) { font-size: 12px; line-height: 1.9; max-width: 370px; margin-top: 20px; }
+  .details-heading { margin-bottom: 45px; }
+  .details-heading h2 { font-size: clamp(48px,5.3vw,78px); }
+  .detail-zoom { position: relative; width: 83.333%; margin-left: auto; }
+  .detail-zoom :global(img) { width: 100%; aspect-ratio: 1.7; object-fit: cover; object-position: 50% 46%; transform: scale(1.32); }
+  .detail-roman { position: absolute; left: 26px; bottom: 16px; font: 400 65px/1 var(--font-display); color: var(--paper-light); text-shadow: 0 1px 3px #261f1866; }
+  .detail-annotations { width: 83.333%; margin-left: auto; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 34px; margin-top: 32px; }
+  .detail-annotations .label { color: var(--gold-dark); font-size: 9px; }
+  .detail-annotations p + p { font-size: 12px; line-height: 1.85; margin-top: 12px; }
+  .artwork-contact { text-align: center; padding-bottom: 100px; }
+  .artwork-contact > p { font-size: 31px; margin-top: 34px; color: var(--ink); }
+  .artwork-contact .text-link { margin-top: 10px; }
+  .artwork-navigation { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); padding-top: 40px; padding-bottom: 75px; }
+  .artwork-navigation a { display: grid; gap: 16px; }
+  .artwork-navigation a:last-child { text-align: right; }
+  .artwork-navigation .label { color: var(--gold-dark); font-size: 9px; }
+  .artwork-navigation .serif { font-size: clamp(36px,4.4vw,66px); line-height: 1.2; }
+  .artwork-navigation .serif span { font-size: .55em; vertical-align: middle; }
+  @media(max-width:1024px) and (min-width:768px) { .artwork-hero-copy { grid-column: 1/7; } .artwork-hero-image { grid-column: 8/13; } h1 { font-size: 87px; } .meaning-title { grid-column: 1/7; } .meaning-body { grid-column: 8/13; } .meaning-title h2 { font-size: 57px; } .self-gift h3 { font-size: 31px; } .detail-zoom, .detail-annotations { width: 100%; } }
+  @media(max-width:767px) { .artwork-hero { display: flex; flex-direction: column; align-items: stretch; padding-top: 126px; padding-bottom: 64px; gap: 45px; } .breadcrumb { margin-bottom: 24px; font-size: 8px; } h1 { font-size: clamp(75px,20vw,116px); } .giant-roman { top: 17%; font-size: 250px; } .artwork-hero-keywords { font-size: 24px; margin-top: 24px; } .artwork-excerpt { margin-top: 22px; } figcaption { font-size: 7px; } .meaning { display: block; } .meaning-title h2 { font-size: 55px; } .meaning-body { padding-top: 32px; font-size: 12px; } .self-gift { display: block; } .self-gift > div { padding: 34px 0; } .self-gift > div + div { border-left: 0; border-top: 1px solid var(--line); } .self-gift h3 { font-size: 33px; } .detail-zoom, .detail-annotations { width: 100%; } .detail-zoom :global(img) { aspect-ratio: 1.1; } .detail-roman { font-size: 45px; } .detail-annotations { display: block; } .detail-annotations > div + div { margin-top: 28px; } .artwork-contact > p { font-size: 27px; } .artwork-navigation { gap: 20px; padding-top: 30px; padding-bottom: 50px; } .artwork-navigation .serif { font-size: 32px; } }
+</style>

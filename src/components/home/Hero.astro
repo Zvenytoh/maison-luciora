@@ -1,0 +1,50 @@
+---
+import Star from '../decorative/Star.astro';
+import PhotoArtwork from '../collection/PhotoArtwork.astro';
+import { artworks } from '../../data/artworks';
+---
+<section class="hero container" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <p class="label eyebrow"><Star/> Maison d’objets symboliques</p>
+    <h1 id="hero-title">Des symboles<br/><em>à garder.</em></h1>
+    <p class="hero-description">Des œuvres inspirées des archétypes du tarot,<br class="desktop-break"/> choisies pour ce qu’elles racontent autant<br class="desktop-break"/> que pour ce qu’elles montrent.</p>
+    <a class="text-link hero-cta" href="/collection/">Découvrir la collection</a>
+    <p class="hero-footnote label">DES HISTOIRES ANCIENNES.<br/>DES OBJETS PERSONNELS.</p>
+  </div>
+  <div class="hero-art">
+    <svg class="hero-orbit" viewBox="0 0 640 800" fill="none" aria-hidden="true"><path d="M51 733V293C51 148 169 31 314 31S577 148 577 293V680" stroke="currentColor" stroke-width=".65"/><path d="M40 729V293C40 142 163 20 314 20S588 142 588 293V680" stroke="currentColor" stroke-width=".35"/><ellipse cx="330" cy="374" rx="313" ry="151" transform="rotate(-31 330 374)" stroke="currentColor" stroke-width=".6"/><circle cx="570" cy="180" r="4" fill="currentColor"/></svg>
+    <Star type="eight" class="hero-star"/>
+    <figure data-parallax>
+      <a href="/collection/le-soleil/" aria-label="Découvrir Le Soleil"><PhotoArtwork artwork={artworks[0]} eager/></a>
+      <figcaption><span class="hero-roman">XIX</span><span><span class="label">LE SOLEIL</span><span class="caption-meaning">Clarté · Vitalité · Accomplissement</span></span><a href="/collection/le-soleil/" aria-label="Découvrir Le Soleil" class="caption-arrow">↗</a></figcaption>
+    </figure>
+  </div>
+  <a class="scroll-cue label" href="#introduction"><span>PRENDRE LE TEMPS</span><span class="scroll-line" aria-hidden="true"></span></a>
+</section>
+<style>
+  .hero { min-height: min(100svh, 1080px); padding-top: 154px; padding-bottom: 96px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0 24px; position: relative; align-items: center; }
+  .hero-copy { grid-column: 1/7; position: relative; z-index: 2; padding-bottom: 36px; }
+  .hero-copy .eyebrow { display: flex; align-items: center; gap: 15px; margin-bottom: 40px; }
+  .eyebrow :global(svg) { width: 14px; height: 14px; flex-shrink: 0; }
+  h1 { font-size: clamp(84px,9vw,144px); line-height: .88; letter-spacing: -.043em; }
+  h1 em { color: var(--gold-dark); }
+  .hero-description { font-size: 13px; line-height: 1.9; margin-top: 34px; }
+  .hero-cta { margin-top: 24px; }
+  .hero-footnote { font-size: 8px; color: var(--ink-muted); margin-top: 66px; line-height: 1.9; }
+  .hero-art { grid-column: 8/13; position: relative; padding-top: 10px; }
+  .hero-art figure { position: relative; z-index: 1; }
+  .hero-art :global(img) { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+  .hero-orbit { position: absolute; width: 127%; max-width: none; height: 121%; top: -10%; left: -17%; color: var(--gold); opacity: .56; pointer-events: none; }
+  :global(.hero-star) { position: absolute; z-index: 2; width: 48px; height: 48px; top: -29px; left: 42%; color: var(--gold); }
+  figcaption { display: flex; align-items: center; gap: 20px; padding-top: 20px; }
+  .hero-roman { font: 400 32px/1 var(--font-display); color: var(--gold-dark); border-right: 1px solid var(--line); padding-right: 20px; }
+  figcaption > span:nth-child(2) { display: grid; gap: 4px; }
+  figcaption .label { font-size: 9px; }
+  .caption-meaning { font-size: 9px; color: var(--ink-muted); }
+  .caption-arrow { margin-left: auto; min-height: 44px; min-width: 44px; display: grid; place-items: center; font-size: 21px; }
+  .scroll-cue { position: absolute; left: 0; bottom: 22px; display: flex; align-items: center; gap: 20px; min-height: 44px; font-size: 8px; }
+  .scroll-line { width: 1px; height: 30px; background: var(--gold); }
+  @media(min-width:1600px) { .hero { gap: 0 38px; } .hero-art { grid-column: 8/13; } }
+  @media(min-width:768px) and (max-width:1024px) { .hero { padding-top: 152px; gap: 0 16px; min-height: 860px; } .hero-copy { grid-column: 1/8; } h1 { font-size: clamp(82px,10.6vw,105px); } .hero-art { grid-column: 8/13; } .hero-copy .eyebrow { font-size: 8px; gap: 10px; } .hero-description { max-width: 310px; } .desktop-break { display: none; } figcaption { gap: 10px; } .hero-roman { padding-right: 10px; font-size: 25px; } .caption-meaning { max-width: 140px; } .hero-footnote { margin-top: 45px; } }
+  @media(max-width:767px) { .hero { display: flex; flex-direction: column; align-items: stretch; padding-top: 141px; padding-bottom: 48px; min-height: auto; gap: 52px; } .hero-copy { padding-bottom: 0; display: contents; } .hero-copy .eyebrow { margin-bottom: 0; font-size: 8px; gap: 10px; order: 0; } h1 { font-size: clamp(66px,17.8vw,114px); order: 1; margin-top: -23px; } .hero-description { font-size: 12px; margin-top: -24px; max-width: 310px; order: 2; } .desktop-break { display: none; } .hero-art { order: 3; padding-top: 0; margin-top: 3px; } .hero-orbit { width: 111%; left: -5.5%; top: -6%; height: 108%; } :global(.hero-star) { width: 32px; height: 32px; top: -20px; } .hero-cta { order: 4; margin-top: -29px; align-self: flex-start; } .hero-footnote { display: none; } figcaption { padding-top: 16px; } .scroll-cue { display: none; } }
+</style>

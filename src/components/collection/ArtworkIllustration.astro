@@ -1,0 +1,62 @@
+---
+import type { Artwork } from '../../data/artworks';
+interface Props { artwork: Artwork; class?: string; }
+const { artwork, class: className = '' } = Astro.props;
+const stars = [[82,130,10],[280,120,12],[70,350,8],[278,332,9],[102,430,6],[244,412,7],[190,86,5],[302,240,5]];
+const rays = Array.from({ length: 32 }, (_, i) => i * 11.25);
+const leaves = Array.from({ length: 9 }, (_, i) => i);
+---
+<svg class={className} viewBox="0 0 360 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label={`Illustration ${artwork.name}, gravure dorée sur papier ivoire`}>
+  <rect width="360" height="480" fill="#f6f0e5"/>
+  <g fill="none" stroke="#8b611d" stroke-width=".8">
+    <path d="M30 450V178C30 95 97 46 180 46S330 95 330 178V450Z"/>
+    <path d="M37 442V178C37 99 102 54 180 54S323 99 323 178V442Z" stroke-width=".4"/>
+    <path d="M30 426V450H56M304 450H330V426M37 423Q45 435 57 442M303 442Q315 435 323 423"/>
+    <path d="M54 423Q78 393 62 346M306 423Q282 393 298 346"/>
+    <path d="M59 408Q45 393 48 379Q61 389 62 399M65 389Q82 376 78 365Q63 373 65 389M64 373Q51 359 54 348Q66 360 64 373M301 408Q315 393 312 379Q299 389 298 399M295 389Q278 376 282 365Q297 373 295 389M296 373Q309 359 306 348Q294 360 296 373" fill="#b8924d" fill-opacity=".35"/>
+    {stars.map(([x,y,r]) => <path d={`M${x} ${y-r}Q${x+1} ${y-1} ${x+r} ${y}Q${x+1} ${y+1} ${x} ${y+r}Q${x-1} ${y+1} ${x-r} ${y}Q${x-1} ${y-1} ${x} ${y-r}Z`} fill="#8b611d" stroke="none"/>)}
+    {[ [63,192],[105,96],[247,160],[281,286],[118,386],[213,394],[293,186],[56,289],[150,110] ].map(([x,y]) => <circle cx={x} cy={y} r=".9" fill="#8b611d" stroke="none"/>)}
+    {artwork.motif === 'sun' && <g>
+      {rays.map((angle, i) => <path transform={`rotate(${angle} 180 254)`} d={i % 2 ? 'M175 211C164 187 189 170 180 139C190 170 183 191 185 211' : 'M177 211L180 132L183 211'} fill="#b8924d" fill-opacity=".24"/>)}
+      <circle cx="180" cy="254" r="44"/><circle cx="180" cy="254" r="40" stroke-width=".4"/>
+      <path d="M153 243Q163 233 173 243M187 243Q197 233 207 243M155 245Q163 241 171 245M189 245Q197 241 205 245M163 242V248M197 242V248M181 241L176 266Q180 270 185 266M168 278Q180 273 192 278Q180 287 168 278M176 292Q180 294 184 292"/>
+      <path d="M152 235Q163 228 173 235M187 235Q197 228 208 235M147 252Q147 280 165 290M213 252Q213 280 195 290"/>
+      <path d="M128 307C57 343 38 309 75 271M223 198C298 165 319 212 254 252" stroke-width=".6"/>
+    </g>}
+    {artwork.motif === 'star' && <g>
+      <path d="M180 112L190 216L262 155L208 229L304 240L208 251L262 325L190 264L180 368L170 264L98 325L152 251L56 240L152 229L98 155L170 216Z" fill="#b8924d" fill-opacity=".22"/>
+      <path d="M180 112V368M56 240H304M98 155L262 325M262 155L98 325" stroke-width=".45"/>
+      <path d="M180 112L208 229L304 240L190 264L180 368L152 251L56 240L170 216Z" stroke-width=".4"/>
+      <circle cx="180" cy="240" r="13"/><circle cx="180" cy="240" r="7"/>
+      <path d="M102 378Q140 365 178 378T260 378M95 387Q140 374 183 387T267 387M106 396Q145 385 180 396T256 396" stroke-width=".55"/>
+      <path d="M86 193L105 171L126 188M242 354L270 365L286 345" stroke-width=".4"/><circle cx="86" cy="193" r="2"/><circle cx="105" cy="171" r="2"/><circle cx="126" cy="188" r="2"/>
+    </g>}
+    {artwork.motif === 'moon' && <g>
+      <path d="M213 145C278 159 294 247 244 295C205 333 150 320 121 295C176 314 226 276 231 229C235 193 225 162 213 145Z" fill="#b8924d" fill-opacity=".25"/>
+      {Array.from({length:12},(_,i)=><path d={`M${217+i*3} ${154+i*4}Q${278-i} ${230+i} ${134+i*9} ${300-i*.4}`} stroke-width=".35"/>)}
+      <ellipse cx="185" cy="249" rx="144" ry="59" transform="rotate(-28 185 249)" stroke-width=".7"/>
+      <circle cx="297" cy="189" r="4" fill="#8b611d"/>
+      <path d="M96 366Q151 349 214 366M113 376Q166 361 234 376" stroke-width=".4"/>
+    </g>}
+    {artwork.motif === 'strength' && <g>
+      <path d="M131 147C87 127 90 180 130 165C148 158 157 150 176 152C197 150 206 158 224 165C264 180 267 127 224 147C205 156 193 161 177 161C158 161 146 156 131 147Z"/>
+      <path d="M180 184C137 170 98 208 96 251C83 279 102 331 126 345C142 371 174 378 192 364C220 375 247 350 253 326C279 308 270 264 260 246C256 213 225 173 180 184Z"/>
+      <path d="M150 212L130 195L123 225M207 212L229 195L236 225M146 226Q180 207 214 227L224 266L216 291L192 320H168L143 292L135 269Z"/>
+      <path d="M147 251Q157 242 169 252M191 252Q203 242 213 251M160 250L161 256M200 250L199 256M174 273L185 273L190 281L180 288L170 281ZM180 288V302M165 300Q179 308 195 300"/>
+      {Array.from({length:14},(_,i)=><path d={`M${103+i*2} ${225+i*8}Q${84+i*5} ${269+i*6} ${136+i*3} ${357-i*2}M${257-i*2} ${225+i*8}Q${276-i*5} ${269+i*6} ${224-i*3} ${357-i*2}`} stroke-width=".45"/>)}
+      <path d="M111 373Q88 324 98 281M249 373Q272 324 262 281"/>
+    </g>}
+    {artwork.motif === 'world' && <g>
+      <circle cx="180" cy="252" r="75"/><ellipse cx="180" cy="252" rx="32" ry="75"/><ellipse cx="180" cy="252" rx="56" ry="75" stroke-width=".4"/>
+      <ellipse cx="180" cy="252" rx="75" ry="25"/><path d="M105 252H255M180 177V327M117 212Q180 234 243 212M117 292Q180 270 243 292"/>
+      <path d="M150 365C72 343 57 201 133 147M210 365C288 343 303 201 227 147"/>
+      {leaves.map(i=><g transform={`rotate(${i*12-48} 180 252)`}><path d="M79 252Q48 236 52 218Q76 224 79 252M80 252Q96 221 107 228Q108 246 80 252" fill="#b8924d" fill-opacity=".22"/><path d="M281 252Q312 236 308 218Q284 224 281 252M280 252Q264 221 253 228Q252 246 280 252" fill="#b8924d" fill-opacity=".22"/></g>)}
+      <path d="M164 365Q180 378 196 365M166 137Q180 131 194 137"/>
+    </g>}
+  </g>
+  <g fill="#674410" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif">
+    <text x="180" y="30" font-size="13" letter-spacing="3">{artwork.roman}</text>
+    <text x="180" y="423" font-size="19" letter-spacing="3">{artwork.name.toLocaleUpperCase('fr')}</text>
+    <text x="180" y="469" font-size="6" letter-spacing="2.2">MAISON LUCIORA</text>
+  </g>
+</svg>

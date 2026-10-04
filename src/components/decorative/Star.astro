@@ -1,0 +1,9 @@
+---
+interface Props { type?: 'four' | 'eight'; class?: string; }
+const { type = 'four', class: className = '' } = Astro.props;
+---
+<svg class={className} viewBox="0 0 80 80" fill="none" aria-hidden="true">
+  {type === 'four'
+    ? <path d="M40 2C43 31 49 37 78 40C49 43 43 49 40 78C37 49 31 43 2 40C31 37 37 31 40 2Z" fill="currentColor" />
+    : <><path d="M40 2L44 31L67 13L49 36L78 40L49 44L67 67L44 49L40 78L36 49L13 67L31 44L2 40L31 36L13 13L36 31Z" fill="currentColor"/><path d="M40 2V78M2 40H78M13 13L67 67M67 13L13 67" stroke="var(--paper-light)" stroke-width=".45"/></>}
+</svg>

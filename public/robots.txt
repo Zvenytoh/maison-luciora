@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://maison-luciora.mighty-grass-7954.chatgpt.site/sitemap-index.xml

@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArtworkCard from '../../components/collection/ArtworkCard.astro';
+import { artworks } from '../../data/artworks';
+import '../../styles/collection.css';
+---
+<BaseLayout title="Les Arcanes" description="Découvrez Les Arcanes, la collection Maison Luciora. Cinq œuvres inspirées du tarot, à choisir pour leur beauté et leur signification.">
+  <section class="collection-hero container"><p class="label eyebrow">COLLECTION — 01</p><h1>Les <em>Arcanes</em></h1><div class="collection-intro"><p>Chaque œuvre est associée à une figure,<br/>une histoire et quelques mots qui l’accompagnent.</p><p class="label">CINQ REGARDS SUR LE PRÉSENT</p></div></section>
+  <section class="collection-catalog container" aria-label="Les cinq œuvres de la collection"><div class="artwork-grid">{artworks.map((artwork,index)=><ArtworkCard artwork={artwork} index={index}/>)}</div></section>
+  <section class="collection-epilogue section container" data-reveal><p class="label eyebrow">UNE AUTRE FAÇON DE CHOISIR</p><h2>Et si l’on commençait<br/><em>par une intention ?</em></h2><a class="text-link" href="/#intentions">Trouver ce que l’on souhaite dire</a></section>
+</BaseLayout>
+<style>
+  .collection-hero { padding-top: 174px; padding-bottom: 92px; }
+  h1 { font-size: clamp(90px,11.5vw,176px); }
+  h1 em { color: var(--gold-dark); }
+  .collection-intro { margin-top: 38px; display: flex; justify-content: space-between; align-items: flex-end; gap: 25px; padding-bottom: 35px; border-bottom: 1px solid var(--line); }
+  .collection-intro p { font-size: 13px; line-height: 1.9; }
+  .collection-intro .label { font-size: 9px; }
+  .collection-catalog { padding-bottom: 100px; }
+  .collection-epilogue { text-align: center; border-top: 1px solid var(--line); }
+  .collection-epilogue h2 { font-size: clamp(50px,5.5vw,80px); line-height: 1.05; }
+  .collection-epilogue .text-link { margin-top: 30px; }
+  @media(max-width:767px) { .collection-hero { padding-top: 145px; padding-bottom: 53px; } h1 { font-size: clamp(70px,18.4vw,114px); } .collection-intro { display: block; margin-top: 24px; padding-bottom: 27px; } .collection-intro p { font-size: 12px; } .collection-intro .label { margin-top: 25px; font-size: 8px; } .collection-catalog { padding-bottom: 82px; } }
+</style>

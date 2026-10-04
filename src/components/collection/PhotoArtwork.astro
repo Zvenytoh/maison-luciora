@@ -1,0 +1,10 @@
+---
+import { Image } from 'astro:assets';
+import { photography } from '../../data/photography';
+import FramedArtwork from './FramedArtwork.astro';
+import type { Artwork } from '../../data/artworks';
+interface Props { artwork: Artwork; class?: string; eager?: boolean; }
+const { artwork, class: className = '', eager = false } = Astro.props;
+const photo = photography[artwork.slug];
+---
+{photo ? <Image class={className} src={photo} alt={`Cadre Maison Luciora ${artwork.name}, gravure dorée sur papier ivoire dans un cadre en bois sombre.`} widths={[400, 640, 960, 1280]} sizes="(max-width: 767px) calc(100vw - 48px), (max-width: 1024px) 50vw, 620px" width={960} format="webp" quality={83} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} /> : <FramedArtwork artwork={artwork} class={className}/>} 

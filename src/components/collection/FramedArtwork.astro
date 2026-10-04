@@ -1,0 +1,9 @@
+---
+import ArtworkIllustration from './ArtworkIllustration.astro';
+import type { Artwork } from '../../data/artworks';
+interface Props { artwork: Artwork; class?: string; scene?: boolean; }
+const { artwork, class: className = '', scene = true } = Astro.props;
+---
+<div class:list={['artwork-scene', `scene-${artwork.motif}`, className, { 'no-scene': !scene }]}>
+  <div class="wood-frame"><div class="frame-mat"><ArtworkIllustration artwork={artwork}/></div></div>
+</div>

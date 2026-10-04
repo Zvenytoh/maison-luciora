@@ -1,0 +1,30 @@
+---
+import PhotoArtwork from '../collection/PhotoArtwork.astro';
+import { artworks } from '../../data/artworks';
+---
+<section class="featured container" aria-labelledby="featured-title">
+  <div class="featured-heading" data-reveal><p class="label">UN PREMIER REGARD</p><span class="featured-number" aria-hidden="true">XIX</span></div>
+  <a class="featured-image image-reveal" href="/collection/le-soleil/" aria-label="Découvrir l’œuvre Le Soleil" data-image-reveal><PhotoArtwork artwork={artworks[0]}/></a>
+  <div class="featured-copy" data-reveal>
+    <p class="label eyebrow">ARCANE XIX</p>
+    <h2 id="featured-title">Le Soleil</h2>
+    <p class="featured-qualities"><span>Clarté</span><span>Vitalité</span><span>Accomplissement</span></p>
+    <p class="featured-line">Pour célébrer ce qui retrouve<br/>enfin sa lumière.</p>
+    <a class="text-link" href="/collection/le-soleil/">Rencontrer Le Soleil</a>
+  </div>
+</section>
+<style>
+  .featured { display: grid; grid-template-columns: repeat(12,minmax(0,1fr)); gap: 0 28px; align-items: center; padding-bottom: var(--section-space); }
+  .featured-heading { grid-column: 1/9; display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
+  .featured-number { font: 400 74px/.9 var(--font-display); color: var(--gold-dark); }
+  .featured-image { grid-column: 1/9; }
+  .featured-image :global(img) { aspect-ratio: 1.28; object-position: 50% 52%; }
+  .featured-copy { grid-column: 10/13; }
+  h2 { font-size: clamp(48px,4.5vw,70px); white-space: nowrap; }
+  .featured-qualities { margin-top: 30px; font: 400 27px/1.5 var(--font-display); color: var(--gold-dark); display: flex; flex-direction: column; }
+  .featured-line { margin-top: 30px; font-size: 12px; line-height: 1.85; }
+  .featured-copy .text-link { margin-top: 20px; font-size: 11px; gap: 18px; }
+  .featured-copy .text-link::after { width: 30px; }
+  @media(max-width:1024px) and (min-width:768px) { .featured-image, .featured-heading { grid-column:1/8; } .featured-copy { grid-column:9/13; } .featured-image :global(img) { aspect-ratio: 4/5; } h2 { font-size: 55px; } }
+  @media(max-width:767px) { .featured { display: block; padding-bottom: 100px; } .featured-heading { margin-bottom: 18px; } .featured-number { font-size: 51px; } .featured-image { display: block; } .featured-image :global(img) { aspect-ratio: 4/5; } .featured-copy { margin-top: 38px; } .featured-copy .eyebrow { margin-bottom: 12px; } h2 { font-size: 64px; } .featured-qualities { font-size: 20px; margin-top: 16px; } .featured-qualities br { display: none; } .featured-qualities br::after { content: ' · '; } .featured-line { margin-top: 18px; } }
+</style>

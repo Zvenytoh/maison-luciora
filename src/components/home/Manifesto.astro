@@ -1,0 +1,25 @@
+---
+import Star from '../decorative/Star.astro';
+const lines = ['Du changement.', 'Du doute.', 'Du courage.', 'De l’amour.', 'De ce qui commence.', 'De ce qui s’achève.'];
+---
+<section class="manifesto section" aria-labelledby="manifesto-title">
+  <div class="container">
+    <p class="label manifesto-label" data-reveal><Star/> NOTRE REGARD SUR LES SYMBOLES</p>
+    <h2 id="manifesto-title" data-reveal>Nous ne cherchons pas<br/><em>à prédire l’avenir.</em></h2>
+    <div class="manifesto-body"><p>Nous nous intéressons aux symboles que les humains utilisent depuis des siècles pour parler du présent.</p><div class="manifesto-lines">{lines.map(line=><p data-manifesto-line>{line}</p>)}</div></div>
+    <p class="manifesto-end label">LE SYMBOLE NE DÉCIDE RIEN. IL NOUS INVITE À REGARDER.</p>
+  </div>
+</section>
+<style>
+  .manifesto { background: var(--ink); color: var(--paper-light); padding-block: clamp(100px,11vw,180px); }
+  .manifesto-label { color: #d1b276; display: flex; align-items: center; gap: 17px; margin-bottom: 45px; }
+  .manifesto-label :global(svg) { width: 15px; height: 15px; flex-shrink: 0; }
+  h2 { font-size: clamp(54px,7.5vw,112px); line-height: .99; max-width: 1160px; }
+  h2 em { color: #d2b77d; }
+  .manifesto-body { display: grid; grid-template-columns: repeat(12,minmax(0,1fr)); gap: 28px; margin-top: 80px; }
+  .manifesto-body > p { grid-column: 2/6; max-width: 340px; color: #c6baaa; font-size: 13px; line-height: 1.95; padding-top: 10px; }
+  .manifesto-lines { grid-column: 7/13; }
+  .manifesto-lines p { font: 400 clamp(35px,3.8vw,58px)/1.35 var(--font-display); color: var(--paper-light); transition: opacity .2s; }
+  .manifesto-end { color: #c6baaa; text-align: center; margin-top: 100px; font-size: 8px; }
+  @media(max-width:767px) { .manifesto-label { font-size: 8px; gap: 12px; margin-bottom: 33px; } h2 { font-size: clamp(45px,11.8vw,67px); } .manifesto-body { display: block; margin-top: 42px; } .manifesto-body > p { font-size: 12px; } .manifesto-lines { margin-top: 46px; } .manifesto-lines p { font-size: clamp(32px,8.5vw,44px); line-height: 1.45; } .manifesto-end { margin-top: 64px; font-size: 7px; } }
+</style>

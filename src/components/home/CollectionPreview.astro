@@ -1,0 +1,19 @@
+---
+import ArtworkCard from '../collection/ArtworkCard.astro';
+import { artworks } from '../../data/artworks';
+import '../../styles/collection.css';
+const selected = [artworks[1], artworks[2], artworks[3]];
+---
+<section class="collection-preview section container" aria-labelledby="collection-title">
+  <div class="collection-heading" data-reveal><div><p class="label eyebrow">COLLECTION — 01</p><h2 id="collection-title">Les Arcanes</h2></div><p>Des figures anciennes réinterprétées<br/>comme des œuvres à vivre au quotidien.</p></div>
+  <div class="artwork-grid">{selected.map((artwork,index)=><ArtworkCard artwork={artwork} index={index}/>)}</div>
+  <div class="collection-end" data-reveal><p class="serif">À chaque regard, une autre histoire.</p><a class="text-link" href="/collection/">Explorer toute la collection</a></div>
+</section>
+<style>
+  .collection-preview { border-top: 1px solid var(--line); }
+  .collection-heading { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 85px; gap: 28px; }
+  .collection-heading p:not(.label) { font-size: 12px; line-height: 1.9; padding-bottom: 5px; }
+  .collection-end { border-top: 1px solid var(--line); margin-top: 82px; padding-top: 33px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .collection-end p { font-size: 28px; color: var(--ink); }
+  @media(max-width:767px) { .collection-heading { display: block; margin-bottom: 48px; } .collection-heading p:not(.label) { margin-top: 24px; font-size: 12px; } .collection-end { display: block; margin-top: 52px; padding-top: 25px; } .collection-end p { font-size: 25px; } .collection-end .text-link { margin-top: 20px; } }
+</style>

@@ -1,0 +1,19 @@
+.artwork-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(24px, 4.2vw, 64px); row-gap: 96px; }
+.artwork-card { min-width: 0; }
+.artwork-position-0 { grid-column: 2/7; }
+.artwork-position-1 { grid-column: 9/13; margin-top: 165px; }
+.artwork-position-2 { grid-column: 1/6; margin-top: -20px; }
+.artwork-position-3 { grid-column: 8/13; margin-top: 140px; }
+.artwork-position-4 { grid-column: 3/8; margin-top: 20px; }
+.artwork-image-link { display: block; position: relative; overflow: hidden; }
+.artwork-image-link img, .artwork-image-link .artwork-scene { width: 100%; aspect-ratio: 4/5; object-fit: cover; transition: transform .8s var(--ease-out); }
+.image-link-label { position: absolute; right: 22px; bottom: 19px; font-size: 10px; letter-spacing: .03em; background: var(--paper-light); padding: 9px 14px; opacity: 0; transform: translateY(4px); transition: opacity .4s, transform .4s; }
+.image-link-label span { margin-left: 18px; }
+.artwork-meta { display: flex; justify-content: space-between; padding-top: 21px; color: var(--gold-dark); }
+.artwork-meta .label { font-size: 9px; }
+.artwork-card h3 { font-size: clamp(34px, 3.4vw, 49px); margin-top: 8px; }
+.artwork-card h3 a { min-height: 44px; display: inline-flex; align-items: center; }
+.artwork-keywords { font-size: 11px; margin-top: 8px; }
+@media(hover:hover) { .artwork-image-link:hover img, .artwork-image-link:hover .artwork-scene { transform: scale(1.015); } .artwork-image-link:hover .image-link-label, .artwork-image-link:focus-visible .image-link-label { opacity: 1; transform: translateY(0); } }
+@media(min-width:768px) and (max-width:1024px) { .artwork-position-0 { grid-column: 1/7; } .artwork-position-1 { grid-column: 8/13; margin-top: 110px; } .artwork-position-2 { grid-column: 1/6; } .artwork-position-3 { grid-column: 7/13; margin-top: 100px; } .artwork-position-4 { grid-column: 2/8; } }
+@media(max-width:767px) { .artwork-grid { display: block; } .artwork-card { margin: 0 0 80px; } .artwork-card:last-child { margin-bottom: 0; } .artwork-meta { padding-top: 18px; } .artwork-keywords { font-size: 11px; } .image-link-label { display: none; } }

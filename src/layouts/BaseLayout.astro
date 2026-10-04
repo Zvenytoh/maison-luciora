@@ -1,0 +1,49 @@
+---
+import Header from '../components/global/Header.astro';
+import Footer from '../components/global/Footer.astro';
+import '../styles/global.css';
+import fontDisplay from '@fontsource/cormorant-garamond/files/cormorant-garamond-latin-400-normal.woff2?url';
+import fontUI from '@fontsource/instrument-sans/files/instrument-sans-latin-400-normal.woff2?url';
+interface Props { title?: string; description?: string; artwork?: {name: string; roman: string}; noindex?: boolean; }
+const { title = 'Des symboles à garder.', description = 'Maison Luciora imagine des œuvres inspirées des archétypes du tarot, choisies pour ce qu’elles racontent autant que pour ce qu’elles montrent.', artwork, noindex = false } = Astro.props;
+const fullTitle = `${title} — Maison Luciora`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const socialImage = new URL('/images/social.jpg', Astro.site);
+const schema = artwork ? { '@context': 'https://schema.org', '@type': 'CreativeWork', name: artwork.name, description, url: canonical.href, creator: { '@type': 'Organization', name: 'Maison Luciora' }, inLanguage: 'fr' } : { '@context': 'https://schema.org', '@type': 'Organization', name: 'Maison Luciora', url: Astro.site?.href, description };
+---
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="theme-color" content="#f4eee3"/>
+    <title>{fullTitle}</title>
+    <meta name="description" content={description}/>
+    {noindex && <meta name="robots" content="noindex, follow"/>}
+    <link rel="canonical" href={canonical}/>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <link rel="sitemap" href="/sitemap-index.xml"/>
+    <link rel="preload" href={fontDisplay} as="font" type="font/woff2" crossorigin/>
+    <link rel="preload" href={fontUI} as="font" type="font/woff2" crossorigin/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="fr_FR"/>
+    <meta property="og:site_name" content="Maison Luciora"/>
+    <meta property="og:title" content={fullTitle}/>
+    <meta property="og:description" content={description}/>
+    <meta property="og:url" content={canonical}/>
+    <meta property="og:image" content={socialImage}/>
+    <meta property="og:image:alt" content="Maison Luciora — une œuvre, une intention."/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content={fullTitle}/>
+    <meta name="twitter:description" content={description}/>
+    <meta name="twitter:image" content={socialImage}/>
+    <script type="application/ld+json" set:html={JSON.stringify(schema)}/>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+    <Header/>
+    <main id="contenu"><slot/></main>
+    <Footer/>
+    <script>import '../scripts/site';</script>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+---
+import { Image } from 'astro:assets';
+import emblem from '../../assets/brand/maison-luciora.png';
+---
+<section class="house-preview section container" aria-labelledby="house-title">
+  <div class="house-emblem" data-reveal><Image src={emblem} alt="Emblème Maison Luciora : soleil, lune et étoiles réunis dans une arche dorée." width={500} widths={[320,500,750]} sizes="(max-width:767px) 80vw, 38vw" format="webp" loading="lazy"/></div>
+  <div class="house-copy" data-reveal><p class="label eyebrow">UNE MAISON, UN REGARD</p><h2 id="house-title">La Maison</h2><div class="prose"><p>Maison Luciora imagine des objets qui prennent place dans un intérieur autant par leur forme que par ce qu’ils représentent.</p><p>Chaque œuvre traduit un symbole ancien dans un langage graphique contemporain, avec l’idée qu’un objet peut simplement être beau, mais aussi devenir personnel.</p></div><a class="text-link" href="/maison/">Découvrir la Maison</a></div>
+</section>
+<style>
+  .house-preview { display: grid; grid-template-columns: repeat(12,minmax(0,1fr)); gap: 28px; align-items: center; }
+  .house-emblem { grid-column: 2/7; }
+  .house-emblem :global(img) { width: 100%; mix-blend-mode: multiply; }
+  .house-copy { grid-column: 8/12; }
+  .house-copy .prose { font-size: 13px; line-height: 1.9; margin-top: 30px; }
+  .house-copy .text-link { margin-top: 25px; }
+  @media(max-width:1024px) and (min-width:768px) { .house-emblem { grid-column: 1/7; } .house-copy { grid-column: 8/13; } }
+  @media(max-width:767px) { .house-preview { display: flex; flex-direction: column; gap: 36px; } .house-emblem { width: 90%; } .house-copy { width: 100%; } .house-copy .prose { font-size: 12px; } }
+</style>

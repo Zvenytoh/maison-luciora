@@ -1,0 +1,25 @@
+---
+import { Image } from 'astro:assets';
+import { photography } from '../../data/photography';
+const image = photography['gift'] ?? photography['le-soleil'];
+---
+<section class="gift-story section container" aria-labelledby="gift-title">
+  <div class="gift-image image-reveal" data-image-reveal><Image src={image} alt="Un cadre enveloppé de papier ivoire et noué d’un ruban doré, posé sur une table en pierre claire." width={1100} widths={[480,800,1100]} sizes="(max-width:767px) calc(100vw - 48px), 56vw" format="webp" loading="lazy" quality={83}/></div>
+  <div class="gift-copy" data-reveal>
+    <p class="label eyebrow">L’ART D’OFFRIR UN SYMBOLE</p>
+    <h2 id="gift-title">Quand un objet<br/><em>dit quelque chose.</em></h2>
+    <div class="prose"><p>Une réussite. Un nouveau départ. Un moment difficile traversé. Une personne que l’on souhaite simplement remercier.</p><p>Certaines œuvres deviennent des cadeaux parce que leur signification compte autant que leur image.</p></div>
+    <a class="text-link" href="#intentions">Découvrir les significations</a>
+  </div>
+</section>
+<style>
+  .gift-story { display: grid; grid-template-columns: repeat(12,minmax(0,1fr)); gap: 32px; align-items: center; }
+  .gift-image { grid-column: 1/8; }
+  .gift-image :global(img) { aspect-ratio: 1.12; object-fit: cover; }
+  .gift-copy { grid-column: 9/13; }
+  h2 { font-size: clamp(44px,4.4vw,70px); line-height: 1.02; }
+  .gift-copy .prose { margin-top: 32px; font-size: 12px; line-height: 1.9; }
+  .gift-copy .text-link { margin-top: 24px; font-size: 11px; gap: 18px; }
+  @media(max-width:1024px) and (min-width:768px) { .gift-image { grid-column: 1/7; } .gift-copy { grid-column: 8/13; } h2 { font-size: 44px; } }
+  @media(max-width:767px) { .gift-story { display: block; } .gift-copy { margin-top: 42px; } h2 { font-size: clamp(46px,12vw,66px); } .gift-copy .prose { margin-top: 26px; } .gift-image :global(img) { aspect-ratio: 4/5; } }
+</style>
