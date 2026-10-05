@@ -4,11 +4,13 @@ Site vitrine éditorial en français, réalisé avec Astro, TypeScript, CSS et J
 
 ## Démarrer
 
-Node.js 22.12 ou supérieur est nécessaire. Les outils Node.js et npm ont été rendus disponibles dans `~/.local/bin` sur cet ordinateur.
+Node.js 22.12 ou supérieur et pnpm 11.19 sont nécessaires.
 
 ```bash
-cd "/home/mehdi/Documents/ChatGPT/New project/maison-luciora"
-npm run dev
+git clone https://github.com/Zvenytoh/maison-luciora.git
+cd maison-luciora
+corepack pnpm install --frozen-lockfile
+pnpm dev
 ```
 
 Ouvrir l’URL affichée par Astro, généralement http://127.0.0.1:4321.

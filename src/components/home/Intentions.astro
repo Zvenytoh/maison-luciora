@@ -10,7 +10,7 @@ import PhotoArtwork from '../collection/PhotoArtwork.astro';
       <h2 id="intentions-title">Parfois, on cherche<br/>d’abord ce que l’on<br/><em>souhaite dire.</em></h2>
       <p>Pour soi. Pour quelqu’un.<br/>Pour un moment qui compte.</p>
       <div class="intention-preview" data-intention-preview aria-hidden="true">
-        {[artworks[0],artworks[1],artworks[3],artworks[4]].map((artwork,i)=><div data-preview-artwork={artwork.slug} hidden={i !== 0}><PhotoArtwork artwork={artwork}/><p class="label">{artwork.roman} — {artwork.name}</p></div>)}
+        {[artworks[0],artworks[1],artworks[3],artworks[4]].map((artwork,i)=><div data-preview-artwork={artwork.slug} hidden={i !== 0}><PhotoArtwork artwork={artwork} preview/><p class="label">{artwork.roman} — {artwork.name}</p></div>)}
       </div>
     </div>
     <div class="intentions-list" data-reveal>
