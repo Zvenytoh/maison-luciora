@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "astro dev --host 127.0.0.1",
     "build": "astro build",
-    "start": "serve dist -l $PORT",
+    "start": "serve dist -l ${PORT:-3000}",
     "preview": "astro preview --host 127.0.0.1",
     "check": "astro check",
     "verify": "node scripts/verify.mjs"
